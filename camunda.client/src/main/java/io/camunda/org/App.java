@@ -3,6 +3,8 @@ package io.camunda.org;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import io.camunda.client.CamundaClient;
@@ -52,10 +54,17 @@ public class App {
 			System.out.println("Connected to: " + client.newTopologyRequest().send().join() + "\n" + client.getConfiguration().toString());
 			
 
+			// Define some variables
+			final Map<String, Object> variables = new HashMap<String, Object>();
+	    	variables.put("reference", "C8_12345");
+	    	variables.put("amount", Double.valueOf(999.00));
+	    	variables.put("cardNumber", "1234567812345678");
+			
 			// Create a process 
 			client.newCreateInstanceCommand()
 	        .bpmnProcessId("Process_Simple")
 	        .latestVersion()
+	        .variables(variables)
 	        .send()
 	        .join();
 			
