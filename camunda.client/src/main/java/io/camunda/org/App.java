@@ -73,7 +73,9 @@ public class App {
 								System.out.println(key + " : " + inputVariables.get(key));
 							}
 							
-							client.newCompleteCommand(job.getKey()).send().join();
+							String done = "Process Done!";
+							
+							client.newCompleteCommand(job.getKey()).variable("done", done).send().join();
 							
 						}
 						
