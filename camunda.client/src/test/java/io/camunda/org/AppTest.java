@@ -1,4 +1,4 @@
-package io.camunda.org.camunda.client;
+package io.camunda.org;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

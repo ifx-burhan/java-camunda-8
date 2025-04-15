@@ -13,7 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.release>21</maven.compiler.release>
   </properties>
 
   <dependencyManagement>
@@ -29,6 +29,17 @@
   </dependencyManagement>
 
   <dependencies>
+  	<!-- https://mvnrepository.com/artifact/io.camunda/camunda-client-java -->
+	<dependency>
+	    <groupId>io.camunda</groupId>
+	    <artifactId>camunda-client-java</artifactId>
+	    <version>8.8.0-alpha3</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-slf4j2-impl</artifactId>
+	    <version>2.24.3</version>
+	</dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
