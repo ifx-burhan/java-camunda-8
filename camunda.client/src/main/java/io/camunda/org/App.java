@@ -3,12 +3,16 @@ package io.camunda.org;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.util.HashMap;
+import java.time.Duration;
 import java.util.Map;
 import java.util.Properties;
 
 import io.camunda.client.CamundaClient;
 import io.camunda.client.CredentialsProvider;
+import io.camunda.client.api.response.ActivatedJob;
+import io.camunda.client.api.worker.JobClient;
+import io.camunda.client.api.worker.JobHandler;
+import io.camunda.client.api.worker.JobWorker;
 import io.camunda.client.impl.oauth.OAuthCredentialsProviderBuilder;
 
 /**
@@ -53,20 +57,33 @@ public class App {
 			// Request the Cluster Topology
 			System.out.println("Connected to: " + client.newTopologyRequest().send().join() + "\n" + client.getConfiguration().toString());
 			
-
-			// Define some variables
-			final Map<String, Object> variables = new HashMap<String, Object>();
-	    	variables.put("reference", "C8_12345");
-	    	variables.put("amount", Double.valueOf(999.00));
-	    	variables.put("cardNumber", "1234567812345678");
 			
-			// Create a process 
-			client.newCreateInstanceCommand()
-	        .bpmnProcessId("Process_Simple")
-	        .latestVersion()
-	        .variables(variables)
-	        .send()
-	        .join();
+			final JobWorker creditCardWorker = 
+					client.newWorker()
+					.jobType("compileProcess")
+					.handler(new JobHandler() {
+
+						@Override
+						public void handle(JobClient client, ActivatedJob job) throws Exception {
+							// TODO Auto-generated method stub
+							
+							final Map<String, Object> inputVariables = job.getVariablesAsMap();
+							
+							for (String key: inputVariables.keySet()) {
+								System.out.println(key + " : " + inputVariables.get(key));
+							}
+							
+							client.newCompleteCommand(job.getKey()).send().join();
+							
+						}
+						
+					})
+					.timeout(Duration.ofSeconds(10).toMillis())
+					.open();
+			
+			//Wait for the Workers
+			Thread.sleep(10000);
+			creditCardWorker.close();
 			
 			
 		} catch (Exception e) {
