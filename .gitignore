@@ -25,7 +25,8 @@
 target/
 bin/
 out/
-config.properties
+*.properties
+*.yaml
 # Eclipse Core
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml

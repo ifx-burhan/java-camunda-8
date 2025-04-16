@@ -1,12 +1,22 @@
 package com.camunda;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import io.camunda.zeebe.client.ZeebeClient;
+
 @SpringBootApplication
 public class Zeebespring2Application implements CommandLineRunner{
-
+	
+	private static final Logger LOG = LoggerFactory.getLogger(Zeebespring2Application.class);
+	
+	@Autowired
+	private ZeebeClient zeebeClient;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Zeebespring2Application.class, args);
 	}
@@ -15,7 +25,7 @@ public class Zeebespring2Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Running ...");
+		LOG.info("Running ... {}", zeebeClient.getConfiguration());
 		
 	}
 
