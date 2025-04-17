@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
 import io.camunda.zeebe.client.ZeebeClient;
 
 @SpringBootApplication
+@ComponentScan(excludeFilters={@ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, value=CompileProcessWorker.class)})
 public class Zeebespring2Application implements CommandLineRunner{
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Zeebespring2Application.class);

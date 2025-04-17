@@ -30,6 +30,24 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.camunda.connector/connector-core -->
+		<dependency>
+		    <groupId>io.camunda.connector</groupId>
+		    <artifactId>connector-core</artifactId>
+		    <version>8.7.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.camunda.connector/spring-boot-starter-camunda-connectors -->
+		<dependency>
+		    <groupId>io.camunda.connector</groupId>
+		    <artifactId>spring-boot-starter-camunda-connectors</artifactId>
+		    <version>8.7.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.camunda.spring/spring-boot-starter-camunda-operate -->
+		<dependency>
+		    <groupId>io.camunda.spring</groupId>
+		    <artifactId>spring-boot-starter-camunda-operate</artifactId>
+		    <version>8.7.0</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.camunda/spring-boot-starter-camunda-sdk -->
 		<dependency>
 		    <groupId>io.camunda</groupId>
